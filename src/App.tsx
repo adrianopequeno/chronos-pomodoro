@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import "./styles/theme.css";
 import "./styles/global.css";
 import { TaskStateModel } from "./models/TaskStateModel";
+import { TaskContextProvider } from "./contexts/TaskContext";
 
 const initialState: TaskStateModel = {
   tasks: [],
@@ -21,5 +22,9 @@ const initialState: TaskStateModel = {
 export const App = () => {
   const [state, setState] = useState(initialState);
 
-  return <Home state={state} setState={setState} />;
+  return (
+    <TaskContextProvider>
+      <Home />;
+    </TaskContextProvider>
+  );
 };

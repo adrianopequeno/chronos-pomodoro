@@ -4,9 +4,8 @@ import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
 
 import styles from "./styles.module.css";
-import { HomeProps } from "../../pages/Home";
 
-export const MainForm = ({ state }: HomeProps) => {
+export const MainForm = () => {
   return (
     <form className={styles.form} action="">
       <div className={styles.formRow}>
@@ -18,7 +17,7 @@ export const MainForm = ({ state }: HomeProps) => {
         />
       </div>
       <div className={styles.formRow}>
-        <p>Próximo intervalo é de {state.config.workTime}min</p>
+        <p>Lorem ipsum dolor sit amet.</p>
       </div>
       <div className={styles.formRow}>
         <Cycles />
