@@ -6,8 +6,13 @@ import { Cycles } from "../Cycles";
 import styles from "./styles.module.css";
 
 export const MainForm = () => {
+  const handleCreateNewTask = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("teste");
+  };
+
   return (
-    <form className={styles.form} action="">
+    <form className={styles.form} action="" onSubmit={handleCreateNewTask}>
       <div className={styles.formRow}>
         <DefaultInput
           labelText="task"
