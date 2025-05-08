@@ -5,13 +5,48 @@ import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
 
 import styles from "./styles.module.css";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import { TaskModel } from "../../models/TaskModel";
 
 export const MainForm = () => {
+  const { setState } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
 
   const handleCreateNewTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("teste", taskNameInput.current?.value);
+
+    if (taskNameInput.current === null) return;
+
+    const taskName = taskNameInput.current.value.trim();
+
+    if (!taskName) {
+      alert("Digite o nome da tarefa");
+      return;
+    }
+
+    const newTask: TaskModel = {
+      id: Date.now().toString(),
+      name: taskName,
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      duration: 1,
+      type: "workTime",
+    };
+
+    const secondsRemeining = newTask.duration * 60;
+
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeTask: newTask,
+        currentCycle: 1, // Conferir
+        secondsRemeining, // Conferir
+        formattedSecondsRemaining: "00:00", // Conferir
+        tasks: [...prevState.tasks, newTask],
+        config: { ...prevState.config },
+      };
+    });
   };
 
   return (
