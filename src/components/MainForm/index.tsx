@@ -70,9 +70,11 @@ export const MainForm = () => {
       <div className={styles.formRow}>
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
-      <div className={styles.formRow}>
-        <Cycles />
-      </div>
+      {state.currentCycle > 0 && (
+        <div className={styles.formRow}>
+          <Cycles />
+        </div>
+      )}
       <div className={styles.formRow}>
         <DefaultButton icon={<PlayCircleIcon />} color="green" />
       </div>
