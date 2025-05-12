@@ -65,6 +65,7 @@ export const MainForm = () => {
           type="text"
           placeholder="Digite algo aqui"
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
       <div className={styles.formRow}>
