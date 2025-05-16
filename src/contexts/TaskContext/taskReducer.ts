@@ -30,6 +30,20 @@ export const taskReducer = (
         formattedSecondsRemaining: "00:00",
         tasks: state.tasks.map((task) => {
           if (state.activeTask && state.activeTask.id === task.id) {
+            return { ...task, completeDate: Date.now() };
+          }
+          return task;
+        }),
+      };
+    }
+    case TaskActionTypes.COMPLETE_TASK: {
+      return {
+        ...state,
+        activeTask: null,
+        secondsRemeining: 0,
+        formattedSecondsRemaining: "00:00",
+        tasks: state.tasks.map((task) => {
+          if (state.activeTask && state.activeTask.id === task.id) {
             return { ...task, interruptDate: Date.now() };
           }
           return task;
@@ -38,6 +52,15 @@ export const taskReducer = (
     }
     case TaskActionTypes.RESET_STATE: {
       return state;
+    }
+    case TaskActionTypes.COUNT_DOWN: {
+      return {
+        ...state,
+        secondsRemeining: action.payload.secondsRemeining,
+        formattedSecondsRemaining: formatSecondsToMinutes(
+          action.payload.secondsRemeining
+        ),
+      };
     }
   }
   // Sempre deve retorna o estado
