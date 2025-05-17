@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import styles from "./styles.module.css";
 import { MouseEvent, useEffect, useState } from "react";
+import { Link } from "react-router";
 
 type AvaliableThemes = "dark" | "light";
 
@@ -39,14 +40,14 @@ export const Menu = () => {
 
   return (
     <div className={styles.menu}>
-      <a
-        href="#"
+      <Link
+        to="/"
         className={styles.menuLink}
         aria-label="Ir para a Home"
         title="Ir para a Home"
       >
         <HomeIcon />
-      </a>
+      </Link>
       <a
         href="#"
         className={styles.menuLink}
