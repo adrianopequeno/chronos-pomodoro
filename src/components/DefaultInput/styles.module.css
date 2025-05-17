@@ -6,6 +6,7 @@
   padding: 0.8rem;
   color: var(--text-default);
   outline: none;
+  border-radius: 0.8rem;
 
   border: 0.2rem solid transparent;
   border-bottom: 0.2rem solid var(--primary);
