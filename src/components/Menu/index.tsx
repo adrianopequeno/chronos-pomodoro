@@ -4,17 +4,17 @@ import {
   MoonIcon,
   SettingsIcon,
   SunIcon,
-} from "lucide-react";
-import styles from "./styles.module.css";
-import { MouseEvent, useEffect, useState } from "react";
-import { Link } from "react-router";
+} from 'lucide-react';
+import styles from './styles.module.css';
+import { MouseEvent, useEffect, useState } from 'react';
+import { RouterLink } from '../RouterLink';
 
-type AvaliableThemes = "dark" | "light";
+type AvaliableThemes = 'dark' | 'light';
 
 export const Menu = () => {
   const [theme, setTheme] = useState<AvaliableThemes>(() => {
     const storageTheme =
-      (localStorage.getItem("theme") as AvaliableThemes) || "dark";
+      (localStorage.getItem('theme') as AvaliableThemes) || 'dark';
     return storageTheme;
   });
 
@@ -28,42 +28,42 @@ export const Menu = () => {
   ) => {
     event.preventDefault();
     setTheme((prevTheme) => {
-      const nextTheme = prevTheme === "dark" ? "light" : "dark";
+      const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
       return nextTheme;
     });
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   return (
     <div className={styles.menu}>
-      <Link
-        to="/"
+      <RouterLink
+        href="/"
         className={styles.menuLink}
         aria-label="Ir para a Home"
         title="Ir para a Home"
       >
         <HomeIcon />
-      </Link>
-      <a
-        href="#"
+      </RouterLink>
+      <RouterLink
+        href="/history/"
         className={styles.menuLink}
         aria-label="Ver Histórico"
         title="Ver Histórico"
       >
         <HistoryIcon />
-      </a>
-      <a
-        href="#"
+      </RouterLink>
+      <RouterLink
+        href="/settings/"
         className={styles.menuLink}
         aria-label="Configurações"
         title="Configurações"
       >
         <SettingsIcon />
-      </a>
+      </RouterLink>
       <a
         href="#"
         className={styles.menuLink}
