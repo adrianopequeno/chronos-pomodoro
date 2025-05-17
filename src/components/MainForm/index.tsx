@@ -1,21 +1,22 @@
-import { useRef } from "react";
-import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
-import { DefaultButton } from "../DefaultButton";
-import { DefaultInput } from "../DefaultInput";
-import { Cycles } from "../Cycles";
+import { useRef } from 'react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
+import { DefaultButton } from '../DefaultButton';
+import { DefaultInput } from '../DefaultInput';
+import { Cycles } from '../Cycles';
 
-import styles from "./styles.module.css";
-import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
-import { TaskModel } from "../../models/TaskModel";
-import { getNextCycle } from "../../utils/getNextCycle";
-import { getNextCyCleType } from "../../utils/getNextCycleType";
-import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
-import { Tips } from "../Tips";
-import { showMessage } from "../../adapters/showMessage";
+import styles from './styles.module.css';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { TaskModel } from '../../models/TaskModel';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCyCleType } from '../../utils/getNextCycleType';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
+import { showMessage } from '../../adapters/showMessage';
 
 export const MainForm = () => {
   const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || '';
 
   //ciclos
   const nextCycle = getNextCycle(state.currentCycle);
@@ -30,7 +31,7 @@ export const MainForm = () => {
     const taskName = taskNameInput.current.value.trim();
 
     if (!taskName) {
-      showMessage.warn("Digite o nome da tarefa");
+      showMessage.warn('Digite o nome da tarefa');
       return;
     }
 
@@ -45,12 +46,12 @@ export const MainForm = () => {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
-    showMessage.success("Tarefa iniciada!");
+    showMessage.success('Tarefa iniciada!');
   };
 
   const handleInterruptTask = () => {
     showMessage.dismiss();
-    showMessage.error("Tarefa interrompida!");
+    showMessage.error('Tarefa interrompida!');
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   };
 
@@ -64,6 +65,7 @@ export const MainForm = () => {
           placeholder="Digite algo aqui"
           ref={taskNameInput}
           disabled={!!state.activeTask}
+          defaultValue={lastTaskName}
         />
       </div>
       <div className={styles.formRow}>
