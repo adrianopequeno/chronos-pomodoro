@@ -5,8 +5,10 @@ import { DefaultButton } from '../../components/DefaultButton';
 import { TrashIcon } from 'lucide-react';
 
 import styles from './styles.module.css';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 export const History = () => {
+  const { state } = useTaskContext();
   return (
     <MainTemplate>
       <Container>
@@ -36,13 +38,13 @@ export const History = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.from({ length: 20 }).map((_, index) => (
-                <tr key={index}>
-                  <td>Estudar React</td>
-                  <td>2h</td>
-                  <td>01/01/2024</td>
-                  <td>Concluído</td>
-                  <td>Estudo</td>
+              {state.tasks.map((task) => (
+                <tr key={task.id}>
+                  <td>{task.name}</td>
+                  <td>{task.duration}min</td>
+                  <td>{new Date(task.startDate).toISOString()}</td>
+                  <td>{task.interruptDate}</td>
+                  <td>{task.type}</td>
                 </tr>
               ))}
             </tbody>
