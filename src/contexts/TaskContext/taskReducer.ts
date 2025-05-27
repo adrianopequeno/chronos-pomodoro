@@ -1,7 +1,7 @@
-import { TaskStateModel } from "../../models/TaskStateModel";
-import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
-import { getNextCycle } from "../../utils/getNextCycle";
-import { TaskActionModel, TaskActionTypes } from "./taskActions";
+import { TaskStateModel } from '../../models/TaskStateModel';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { TaskActionModel, TaskActionTypes } from './taskActions';
 
 export const taskReducer = (
   state: TaskStateModel,
@@ -27,10 +27,10 @@ export const taskReducer = (
         ...state,
         activeTask: null,
         secondsRemeining: 0,
-        formattedSecondsRemaining: "00:00",
+        formattedSecondsRemaining: '00:00',
         tasks: state.tasks.map((task) => {
           if (state.activeTask && state.activeTask.id === task.id) {
-            return { ...task, completeDate: Date.now() };
+            return { ...task, interruptDate: Date.now() };
           }
           return task;
         }),
@@ -41,10 +41,10 @@ export const taskReducer = (
         ...state,
         activeTask: null,
         secondsRemeining: 0,
-        formattedSecondsRemaining: "00:00",
+        formattedSecondsRemaining: '00:00',
         tasks: state.tasks.map((task) => {
           if (state.activeTask && state.activeTask.id === task.id) {
-            return { ...task, interruptDate: Date.now() };
+            return { ...task, completeDate: Date.now() };
           }
           return task;
         }),
