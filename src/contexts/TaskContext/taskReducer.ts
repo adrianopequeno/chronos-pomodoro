@@ -63,6 +63,14 @@ export const taskReducer = (
         ),
       };
     }
+    case TaskActionTypes.CHANGE_SETTINGS: {
+      return {
+        ...state,
+        config: {
+          ...action.payload,
+        },
+      };
+    }
   }
   // Sempre deve retorna o estado
   return state;

@@ -9,9 +9,10 @@ import styles from './styles.module.css';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { showMessage } from '../../adapters/showMessage';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export const Settings = () => {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const workTimeInputRef = useRef<HTMLInputElement>(null);
   const shortBreakInputRef = useRef<HTMLInputElement>(null);
   const longBreakInputRef = useRef<HTMLInputElement>(null);
@@ -47,7 +48,17 @@ export const Settings = () => {
       });
       return;
     }
-    console.log(workTime, shortBreakTime, longBreakTime);
+
+    dispatch({
+      type: TaskActionTypes.CHANGE_SETTINGS,
+      payload: {
+        workTime,
+        shortBreakTime,
+        longBreakTime,
+      },
+    });
+
+    showMessage.success('Configurações salvas com sucesso');
   };
 
   return (
