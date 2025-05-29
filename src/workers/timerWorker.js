@@ -1,4 +1,4 @@
-isRunning = false;
+let isRunning = false;
 
 self.onmessage = (event) => {
   if (isRunning) {
